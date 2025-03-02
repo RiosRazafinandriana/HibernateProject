@@ -14,7 +14,7 @@ public class ProfScreen extends JPanel {
         gbc.gridx = 0; // Première colonne
         gbc.gridy = 0; // Première ligne
         gbc.anchor = GridBagConstraints.PAGE_END;  // Aligner en bas
-        add(new JLabel("Bienvenue sur le deuxième écran", JLabel.CENTER), gbc);
+        add(new JLabel("Liste des Professeurs", JLabel.CENTER), gbc);
 
         // Ajouter un espace entre le label et le bouton
         gbc.gridy = 1;

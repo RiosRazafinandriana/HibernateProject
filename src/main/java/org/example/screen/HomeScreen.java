@@ -2,8 +2,6 @@ package org.example.screen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomeScreen extends JPanel {
     public HomeScreen(MainFrame mainFrame) {
