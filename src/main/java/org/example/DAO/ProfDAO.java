@@ -35,7 +35,7 @@ public class ProfDAO {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.update(prof);
+            session.merge(prof);
             session.getTransaction().commit();
         } finally {
             session.close();
@@ -48,7 +48,7 @@ public class ProfDAO {
             session.beginTransaction();
             Prof prof = session.get(Prof.class, codeprof);
             if (prof != null) {
-                session.delete(prof);
+                session.remove(prof);
             }
             session.getTransaction().commit();
         } finally {
@@ -56,25 +56,18 @@ public class ProfDAO {
         }
     }
 
-    public List<Prof> getAllUsers() {
-        // Créer une session Hibernate
+    public List<Prof> getAllProfs() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List<Prof> profs = null;
 
         try {
-            // Démarrer une transaction
             session.beginTransaction();
-
-            // Requête HQL pour récupérer tous les utilisateurs
             Query<Prof> query = session.createQuery("FROM Prof", Prof.class);
 
-            // Exécution de la requête et récupération des résultats
             profs = query.getResultList();
 
-            // Valider la transaction
             session.getTransaction().commit();
         } finally {
-            // Fermer la session
             session.close();
         }
 
