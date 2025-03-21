@@ -409,12 +409,12 @@ class CustomTextField extends JTextField {
         private String placeholder;
 
     public CustomTextField(String placeholder) {
-        this.placeholder = placeholder;
-    }
+            this.placeholder = placeholder;
+        }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
         if (getText().isEmpty() && !hasFocus()) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

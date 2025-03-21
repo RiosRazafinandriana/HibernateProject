@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Salle {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codeSal;
+    private String codeSal;
     private String designation;
 }
