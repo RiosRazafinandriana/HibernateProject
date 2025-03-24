@@ -24,7 +24,7 @@ public class AjoutSalle {
         frame = new JFrame("Ajouter une salle");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(6, 2));  // Modifié pour ajouter une ligne de plus
+        frame.setLayout(new GridLayout(3, 2));  // Modifié pour ajouter une ligne de plus
 
         // Ajouter des champs de texte pour chaque information
         frame.add(new JLabel("Code de la salle:"));
