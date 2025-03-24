@@ -73,6 +73,7 @@ public class SalleScreen extends JPanel {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                this.setHorizontalAlignment(JLabel.CENTER);
 
                 if (isSelected) {
                     c.setBackground(new Color(100, 150, 250)); // Bleu clair pour la sélection
