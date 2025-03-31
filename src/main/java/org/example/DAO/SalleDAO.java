@@ -32,6 +32,23 @@ public class SalleDAO {
         }
     }
 
+    public String findLastCodeSal(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        String lastCodesal = null;
+        try {
+            session.beginTransaction();
+            Query<String> query = session.createQuery(
+                    "SELECT s.codeSal FROM Salle s ORDER BY CAST(SUBSTRING(s.codeSal, 2) AS int) DESC",
+                    String.class
+            );
+            query.setMaxResults(1);
+            lastCodesal = query.uniqueResult();
+        }finally {
+            session.close();
+        }
+        return lastCodesal;
+    }
+
     public void updateSalle(Salle salle) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {

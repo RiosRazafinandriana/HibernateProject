@@ -23,13 +23,13 @@ public class AjoutProf {
     public void initialize() {
         frame = new JFrame("Ajouter un Professeur");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(6, 2));  // Modifié pour ajouter une ligne de plus
+        frame.setSize(400, 250);
+        frame.setLayout(new GridLayout(4, 2));  // Modifié pour ajouter une ligne de plus
 
         // Ajouter des champs de texte pour chaque information
-        frame.add(new JLabel("Code du professeur:"));
-        codeprofField = new JTextField();
-        frame.add(codeprofField);
+//        frame.add(new JLabel("Code du professeur:"));
+//        codeprofField = new JTextField();
+//        frame.add(codeprofField);
 
         frame.add(new JLabel("Nom du professeur:"));
         nomField = new JTextField();
@@ -59,14 +59,24 @@ public class AjoutProf {
 
     public void addProf() {
         // Récupérer les valeurs saisies par l'utilisateur
-        String codeprof = codeprofField.getText();
+        //String codeprof = codeprofField.getText();
         String nom = nomField.getText();
         String prenom = prenomField.getText();
         String grade = gradeField.getText();
 
+        String lastCode = profDAO.findLastCodeProf();
+        System.out.println(lastCode);
+        int nextNumber = 1;
+
+        if (lastCode != null && lastCode.startsWith("p")) {
+            nextNumber = Integer.parseInt(lastCode.substring(1)) + 1;
+        }
+
+        String newCodeProf = "p" + nextNumber;
+
         // Créer un objet Prof à partir des valeurs saisies
         Prof prof = Prof.builder()
-                .codeprof(codeprof)
+                .codeprof(newCodeProf)
                 .nom(nom)
                 .prenom(prenom)
                 .grade(grade)
@@ -111,7 +121,7 @@ public class AjoutProf {
 
     // Méthode pour réinitialiser les champs
     private void resetFields() {
-        codeprofField.setText("");
+        //codeprofField.setText("");
         nomField.setText("");
         prenomField.setText("");
         gradeField.setText("");

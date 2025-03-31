@@ -31,6 +31,23 @@ public class ProfDAO {
         }
     }
 
+    public String findLastCodeProf(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        String lastCodeProf = null;
+        try {
+            session.beginTransaction();
+            Query<String> query = session.createQuery(
+                    "SELECT p.codeprof FROM Prof p ORDER BY CAST(SUBSTRING(p.codeprof, 2) AS int) DESC",
+                    String.class
+            );
+            query.setMaxResults(1);
+            lastCodeProf = query.uniqueResult();
+        }finally {
+            session.close();
+        }
+        return lastCodeProf;
+    }
+
     public void updateProf(Prof prof) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {

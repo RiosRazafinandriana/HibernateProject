@@ -23,13 +23,13 @@ public class AjoutSalle {
     public void initialize() {
         frame = new JFrame("Ajouter une salle");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(3, 2));  // Modifié pour ajouter une ligne de plus
+        frame.setSize(400, 150);
+        frame.setLayout(new GridLayout(2, 2));  // Modifié pour ajouter une ligne de plus
 
         // Ajouter des champs de texte pour chaque information
-        frame.add(new JLabel("Code de la salle:"));
-        codesalleField = new JTextField();
-        frame.add(codesalleField);
+        //frame.add(new JLabel("Code de la salle:"));
+        //codesalleField = new JTextField();
+        //frame.add(codesalleField);
 
         frame.add(new JLabel("Désignation :"));
         designationField= new JTextField();
@@ -51,12 +51,21 @@ public class AjoutSalle {
 
     public void addSalle() {
         // Récupérer les valeurs saisies par l'utilisateur
-        String codesalle = codesalleField.getText();
+        //String codesalle = codesalleField.getText();
         String designation = designationField.getText();
+
+        String lastCode = salleDAO.findLastCodeSal();
+        int nextNumber = 1;
+
+        if (lastCode != null && lastCode.startsWith("s")) {
+            nextNumber = Integer.parseInt(lastCode.substring(1)) + 1;
+        }
+
+        String newCodeSal = "s" + nextNumber;
 
         // Créer un objet Prof à partir des valeurs saisies
         Salle salle = Salle.builder()
-                .codeSal(codesalle)
+                .codeSal(newCodeSal)
                 .designation(designation)
                 .build();
 
@@ -65,7 +74,7 @@ public class AjoutSalle {
             salleDAO.addSalle(salle);  // Appel à la méthode pour insérer le professeur
 
             // Afficher un message de succès
-            JOptionPane.showMessageDialog(frame, "Professeur ajouté avec succès !");
+            JOptionPane.showMessageDialog(frame, "Salle ajouté avec succès !");
 
             salleScreen.loadSalleData();
 
@@ -99,7 +108,7 @@ public class AjoutSalle {
 
     // Méthode pour réinitialiser les champs
     private void resetFields() {
-        codesalleField.setText("");
+        //codesalleField.setText("");
         designationField.setText("");
     }
 }
